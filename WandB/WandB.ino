@@ -31,7 +31,7 @@ void SWbool(int DotNum, int SwNum, int Row, int Col){ //the dot matrix is turned
   }
 }
 
-void SWboolCollect(int DotNum, int select[], int Row, int Col)
+void SWboolCollection(int DotNum, int select[], int Row, int Col)
 {
   for(int i = 0; i < 48; i++) // number of sw is 48
   {
@@ -61,7 +61,8 @@ void setup()
     pinMode(sw[i], INPUT_PULLUP);
   }
 
-  for(int j = 0; j < 3; j++) {
+  for(int j = 0; j < 3; j++) 
+  {
     lc.shutdown(j,false); // power saving mode off
     lc.setIntensity(j,8); // Brightness 8
     lc.clearDisplay(j); // led initialization
@@ -77,5 +78,5 @@ void loop()
     SWselect[i] = digitalRead(sw[i]);
   }
 
-  SWboolCollect(0, SWselect, 0, 8); //SWboolCollect function call
+  SWboolCollection(0, SWselect, 0, 8); //SWboolCollect function call
 }
