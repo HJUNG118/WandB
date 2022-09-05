@@ -1,0 +1,16 @@
+오버헤드비의 스위치를 한개씩 다 분리해버리면 모든 스위치가 다 눌리는 경우가 극히 드물 것이기 때문에 4개단 한파트로 분리해서 생각해야 한다.
+
+0, 1, 12, 13 스위치가 하나의 파트고 이중에 하나라도 눌리면으로 간다.
+
+if(!SWselect[0] && !SWselect[1]) //can't use all 48 switch....-> divide by 12 part
+{
+  digitalWrite(led, 1);
+}
+else if(SWselect[0] && SWselect[1])
+{
+  digitalWrite(led, 0);
+}
+else
+{
+  Serial.println("yellow");
+
