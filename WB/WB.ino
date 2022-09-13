@@ -13,6 +13,6 @@ void setup()
 void loop()
 {
   int SWselect[48];
-  SWread(SWselect, sw);
+  SWread(SWselect, sw, 48);
   SWboolCollection(0, SWselect, 0, 8); //SWboolCollect function call
 }

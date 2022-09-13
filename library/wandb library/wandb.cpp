@@ -21,9 +21,9 @@ void MatrixSetting() //matrix setting
   }
 }
 
-void SWread(int SWselect[], int sw[]) // Read 48 switch signals
+void SWread(int SWselect[], int sw[], int a) // Read 48 switch signals
 {
-  for(int i = 0; i < 48; i++)
+  for(int i = 0; i < a; i++)
   {
     SWselect[i] = digitalRead(sw[i]);
   }

@@ -10,7 +10,7 @@ Released into the public domain
 
 void SWinput(int sw[], int a);
 void MatrixSetting();
-void SWread(int SWselect[], int sw[]);
+void SWread(int SWselect[], int sw[], int a);
 
 void DotOn(int MatrixNum, int row1, int col1, int row2, int col2);
 void DotOff(int MatrixNum, int row1, int col1, int row2, int col2);
