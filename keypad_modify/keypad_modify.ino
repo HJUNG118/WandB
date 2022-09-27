@@ -1,5 +1,5 @@
 #include "wandb.h"
-int sw[12] = {27, 26, 25, 24, 23, 22, 8, 9, 10, 11, 12, 13};
+int sw[12] = {29, 28, 27, 26, 25, 24, 13, 12, 11, 10, 9, 8};
 
 void setup() {
   Serial.begin(9600);
@@ -18,18 +18,18 @@ void loop() {
   && !SWselect[6] && !SWselect[7] && !SWselect[8] && !SWselect[9] && !SWselect[10] && !SWselect[11])
   {
     Serial.println('r');
-    delay(1000);
+    //delay(1000);
   }
   else if(SWselect[0] && SWselect[1] && SWselect[2] && SWselect[3] && SWselect[4] && SWselect[5]
   && SWselect[6] && SWselect[7] && SWselect[8] && SWselect[9] && SWselect[10] && SWselect[11])
   {
     Serial.println('g');
-    delay(1000);
+    //delay(1000);
   }
   else
   {
     Serial.println('y');
-    delay(1000);
+    //delay(1000);
   }
 
 }
