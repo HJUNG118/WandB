@@ -21,61 +21,78 @@ void DotOff(int matrix, int row1, int col1, int row2, int col2){  //turns off th
       }
     }
 }
-void CGget(int button) 
+void CGweightGet(int sw[]) 
 {
-    if(Serial.available())
+  if(Serial.available())
+  {
+    String weight = Serial.readStringUntil('\n');                                                       
+      
+    float w1 = weight.indexOf(","); //Output the index value of the character to be separated
+    float w2= weight.indexOf(",", w1+1); 
+    float length = weight.length(); 
+      
+    String we1 = weight.substring(0, w1); //String separated by index
+    String we2 = weight.substring(w1+1, w2); 
+    String we3 = weight.substring(w2+1, length); 
+
+    float wgt1 = we1.toFloat();
+    float wgt2 = we2.toFloat();
+    float wgt3 = we3.toFloat();
+  }
+
+}
+
+void CGcoordinateGet(int sw[], int button)
+{
+  float xcoordinate[12];
+  float ycoordinate[12];
+  float xWgtMulDistance = 0;
+  float yWgtMulDistance = 0;
+  float xCGcoordinate;
+  float yCGcoordinate;
+  float WgtTotal = 0;
+      
+  for(int i = 0; i < 12; i++)
+  {
+    int x = i + 1;
+    int y = 1;
+    if(i > 5)
     {
-      String weight = Serial.readStringUntil('\n');                                                       
-      
-      float w1 = weight.indexOf(","); //Output the index value of the character to be separated
-      float w2= weight.indexOf(",", w1+1); 
-      float length = weight.length(); 
-      
-      String we1 = weight.substring(0, w1); //String separated by index
-      String we2 = weight.substring(w1+1, w2); 
-      String we3 = weight.substring(w2+1, length); 
-
-      float wgt1 = we1.toFloat();
-      float wgt2 = we2.toFloat();
-      float wgt3 = we3.toFloat();
-      
-      
-      float CG = ((wgt1 * 1) + (wgt2 * 2) +(wgt3 * 3)) / (wgt1 + wgt2 + wgt3);
-      Serial.println(CG);
-      Coordinate(CG);
+      y = 2;
+      x = i - 5;
     }
+    if(!sw[i])
+    {
+        xcoordinate[i] = x * 1.5;
+        ycoordinate[i] = y * 1.5;
+        WgtTotal += 1.5;
+    }
+    if(sw[i])
+    {
+      xcoordinate[i] = 0;
+      ycoordinate[i] = 0;
+    }
+
+    xWgtMulDistance += xcoordinate[i];
+    yWgtMulDistance += ycoordinate[i];
+  }
+  xCGcoordinate = xWgtMulDistance / WgtTotal;
+  yCGcoordinate = yWgtMulDistance / WgtTotal;
+
+  Serial.print(xCGcoordinate, 0);
+  Serial.print("\t");
+  Serial.println(yCGcoordinate, 0);
+  delay(1000);
+  //CGdotmatrix(xCGcoordinate, yCGcoordinate, button);
 }
 
-void Coordinate(float CGcoordinate)
+/*void CGdotmatrix(float row, float col, int button)
 {
-  if(1 < CGcoordinate < 2)
+  if(!button)
   {
-    if(!button){
-      DotOn(0, 0, 0, 8, 8);
-    }
-    else{
-      DotOff(0, 0, 0, 8, 8);
-    }
+    lc.clearDisplay(0);
   }
-  else if(2 <= CGcoordinate < 3)
-  {
-    if(!button){
-      DotOn(1, 0, 0, 8, 8);
-    }
-    else{
-      DotOff(1, 0, 0, 8, 8);
-    }
-  }
-  else if(3 <= CGcoordinate < 4)
-  {
-    if(!button){
-      DotOn(2, 0, 0, 8, 8);
-    }
-    else{
-      DotOff(2, 0, 0, 8, 8);
-    }
-  }
-}
+}*/
 
 void SWbool(int DotNum, int SwNum, int Row, int Col){ //the dot matrix is turned on and off according to a switch (with if-else if)
   if(!SwNum) {  //because sw is input_pullup
@@ -129,13 +146,19 @@ void setup()
 void loop()
 {
   int SWselect[12];
-  
+
   for(int i = 0; i < 12; i++)
   {
     SWselect[i] = digitalRead(sw[i]);
   }
   int buttonstate = digitalRead(button);
 
-  SWboolCollection(0, SWselect, 0, 8); //SWboolCollect function call
-  CGget(buttonstate);
+  SWboolCollection(0, SWselect, 0, 8); //SWboolCollect function cal
+  CGweightGet(SWselect);
+  CGcoordinateGet(SWselect, buttonstate);
+  if(!buttonstate)
+  {
+    lc.shutdown(1, true);
+  }
+  
 }
