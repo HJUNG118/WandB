@@ -1,7 +1,6 @@
 #include <HX711.h>
 #include <Wire.h>
 
-
 HX711 scale1;
 HX711 scale2;
 HX711 scale3;
@@ -48,28 +47,15 @@ void loop() {
  scale2.set_scale(calibration_factor2);
  scale3.set_scale(calibration_factor3);
 
-  Parameter1 = scale1.get_units();    //여기 set_scale 로 바꿔보기.
-  Parameter2 = scale2.get_units();
-  Parameter3 = scale3.get_units();
+ Parameter1 = scale1.get_units();    //여기 set_scale 로 바꿔보기.
+ Parameter2 = scale2.get_units();
+ Parameter3 = scale3.get_units();
 
-  //MyString = (Parameter1 + Parameter2 + Parameter3)*0.001;
-  
-   
- //Serial.print("weight1 :\t");
  Serial.print(scale1.get_units(5)*0.001 , 1);   //first = Unit conversion (lb to kg), second = decimal point
  Serial.print(",");
-
- //Serial.print("weight2 :\t");
  Serial.print(scale2.get_units(5)*0.001 , 1);   //first = Unit conversion (lb to kg), second = decimal point
  Serial.print(",");
-
- //Serial.print("weight3 :\t");
  Serial.println(scale3.get_units(5)*0.001 , 1);   //first = Unit conversion (lb to kg), second = decimal point
- //Serial.println(" kg");
-
- //Serial.print("total:   ");
- //Serial.print(MyString , 1);
- //Serial.println("kg    ");
 
  delay(1000);
  }

@@ -21,7 +21,7 @@ void DotOff(int matrix, int row1, int col1, int row2, int col2){  //turns off th
       }
     }
 }
-void CGweightGet(int sw[]) 
+void CGweightGet() 
 {
   if(Serial.available())
   {
@@ -42,7 +42,7 @@ void CGweightGet(int sw[])
 
 }
 
-void CGcoordinateGet(int sw[], int button)
+void CGcoordinateGet(int sw[])
 {
   float xcoordinate[12];
   float ycoordinate[12];
@@ -83,16 +83,7 @@ void CGcoordinateGet(int sw[], int button)
   Serial.print("\t");
   Serial.println(yCGcoordinate, 0);
   delay(1000);
-  //CGdotmatrix(xCGcoordinate, yCGcoordinate, button);
 }
-
-/*void CGdotmatrix(float row, float col, int button)
-{
-  if(!button)
-  {
-    lc.clearDisplay(0);
-  }
-}*/
 
 void SWbool(int DotNum, int SwNum, int Row, int Col){ //the dot matrix is turned on and off according to a switch (with if-else if)
   if(!SwNum) {  //because sw is input_pullup
@@ -128,7 +119,6 @@ void SWboolCollection(int DotNum, int select[], int Row, int Col)
 void setup()
 {
   Serial.begin(9600);
-  Serial1.begin(9600);
   for(int i = 0; i < 12; i++)
   {
     pinMode(sw[i], INPUT_PULLUP);
@@ -154,11 +144,6 @@ void loop()
   int buttonstate = digitalRead(button);
 
   SWboolCollection(0, SWselect, 0, 8); //SWboolCollect function cal
-  CGweightGet(SWselect);
-  CGcoordinateGet(SWselect, buttonstate);
-  if(!buttonstate)
-  {
-    lc.shutdown(1, true);
-  }
-  
+  CGweightGet();
+  CGcoordinateGet(SWselect);
 }
