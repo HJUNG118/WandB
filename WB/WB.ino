@@ -1,5 +1,6 @@
 #include "wandb.h"
 
+
 int sw[12] = {29, 28, 27, 26, 25, 24, 13, 12, 11, 10, 9, 8};
 
 
@@ -8,6 +9,8 @@ void setup()
   Serial.begin(9600);
   SWinput(sw, 12); // SW INPUT-PULLUP declaration fuction
   MatrixSetting(); // dot matrix initialize, brightness setting, power on
+  print_weight();
+  print_CG();
 }
 
 void loop()

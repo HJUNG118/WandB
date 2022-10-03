@@ -14,18 +14,11 @@ float Parameter1;
 float Parameter2;
 float Parameter3;
 
-int Red = A4;
-int Yew = A5;
-int Grn = A6;
 
 void setup() {
 
  Serial.begin(9600);
 
- pinMode(Red, OUTPUT);
- pinMode(Yew, OUTPUT);
- pinMode(Grn, OUTPUT);
- 
  scale1.begin(2, 3);
  scale1.tare(); // first HX711 DTpin, second HX711 SCKpin
  
@@ -50,12 +43,14 @@ void loop() {
  Parameter1 = scale1.get_units();    //여기 set_scale 로 바꿔보기.
  Parameter2 = scale2.get_units();
  Parameter3 = scale3.get_units();
+ MyString = Parameter1 + Parameter2 + Parameter3 ;
 
  Serial.print(scale1.get_units(5)*0.001 , 1);   //first = Unit conversion (lb to kg), second = decimal point
  Serial.print(",");
  Serial.print(scale2.get_units(5)*0.001 , 1);   //first = Unit conversion (lb to kg), second = decimal point
  Serial.print(",");
- Serial.println(scale3.get_units(5)*0.001 , 1);   //first = Unit conversion (lb to kg), second = decimal point
-
+ Serial.print(scale3.get_units(5)*0.001 , 1);   //first = Unit conversion (lb to kg), second = decimal point
+ Serial.print(",");
+ Serial.println(MyString *0.001 , 1);
  delay(1000);
  }
