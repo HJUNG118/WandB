@@ -6,6 +6,7 @@ Released into the public domain
 */
 #ifndef wandb_H
 #define wandb_H
+#include <OzOLED.h>
 #include <LedControl.h>
 
 #define AllSwNum 12
@@ -28,6 +29,12 @@ void SWread(int SWselect[], int sw[], int SwNum);
 
 void DotOn(int MatrixNum, int row1, int col1, int row2, int col2);
 void DotOff(int MatrixNum, int row1, int col1, int row2, int col2);
+
+void print_weight();
+void print_CG();
+void LoadCell_Weight(float wgt1, float wgt2, float wgt3, float wgt4);
+void CGposition(float x, float y);
+
 void CGweightGet();
 void CGcoordinateGet(int sw[]);
 void SWbool(int DMatrixNum, int SwNum, int Row, int Col);
