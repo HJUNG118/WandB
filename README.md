@@ -13,3 +13,11 @@
     * Arduino source code that the load cell measures the weight of the load and determines whether there is space from the switch array system
   * overheadbinsw
     * Arduino source code to determine the available space inside the overhead bean using a switch array
+# dot_matrix_with_keypad_library
+* Arduino source code that linked switch and dot matrix using keypad library
+
+# libray
+name | purpose
+---| ---| ---|
+d| d| d|
+d| d| d|
