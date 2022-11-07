@@ -19,7 +19,7 @@
 # libray
 name | purpose
 --- | --- |
-LedControl | d |
-OzOLED | d |
-position | d |
-wandb | d |
+LedControl | dot matrix module use |
+OzOLED | OLED module use |
+position | Specify weight and C.G coordinates using OLED |
+wandb | OLED, LED, dot matrix control functions using switches |
