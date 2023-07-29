@@ -1,8 +1,6 @@
-<div align="center">
-  <p align="center">
-   <h2>This repository covers two systems.</h2>
-  </p>
-</div>
+
+   <h2>Note: This repository covers two systems.</h2>
+
 
 # 1. Weight and Balance system
 * This is the source code for the weight and balce monitoring system
